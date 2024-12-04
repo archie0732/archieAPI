@@ -1,12 +1,12 @@
 export interface NAPIError {
-  APIName: "nhentai";
+  APIName: 'nhentai';
   error: string;
   status: number;
 }
 
-export interface R7DoujinAPI {
+export interface R7APIDoujinData {
   id: number;
-  media_id: number;
+  mediaId: string;
   language: string;
   artist: string;
   characters: string[];
@@ -17,17 +17,13 @@ export interface R7DoujinAPI {
   };
   pages: string[];
   cover: string;
-  tags: {
-    type: string;
-    name: string;
-  }[];
+  tags: string[];
   favorites: number;
-  count: number;
 }
 
-export interface R7NArtist {
+export interface R7NView {
   title: string;
   id: string;
   cover: string;
-  lang: "jp" | "ch" | "en";
+  lang: 'jp' | 'zh' | 'en';
 }

@@ -1,27 +1,55 @@
-import express from "express";
-import { artistAPI } from "./nhentai/artist";
+import { doujinAPI } from './nhentai/album';
+import { artistAPI } from './nhentai/artist';
+import express from 'express';
+import { doiujinSearchAPI } from './nhentai/search';
 
-const app: express.Application = express();
+const app = express();
 
-app.get("/api/nhentai", async (req: any, res: any) => {
-  const artist = req.query["artist"];
+// artist
+app.get('/api/nhentai/artist', async (req, res) => {
+  const artist = req.query['artist'];
 
-  if (typeof artist !== "string") {
-    return res.status(404).json({ error: "wtf" });
+  if (typeof artist !== 'string') {
+    res.status(400);
+    return;
   }
 
   const data = await artistAPI(artist);
 
-  return res.json(data);
+  res.json(data);
 });
 
-app.get("/api", (_, res: any) => {
-  return res.json({
-    title: "welcome to archie api",
-    text: "use /api/nhentai?artist= to get artist api",
+// doujin id
+app.get('/api/nhentai/doujin/:id', async (req, res) => {
+  const id = req.params['id'];
+
+  if (typeof id !== 'string') {
+    res.status(400);
+    return;
+  }
+  const doiujin = await doujinAPI(id);
+  res.json(doiujin);
+});
+
+app.get('/api/nhentai/search', async (req, res) => {
+  const keyword = req.query['q'];
+
+  if (typeof keyword !== 'string') {
+    res.status(400);
+    return;
+  }
+  const doiujin = await doiujinSearchAPI(keyword);
+  res.json(doiujin);
+});
+
+// home pages
+app.get('/api', (_, res) => {
+  res.json({
+    title: 'Welcome to Archie API',
+    text: 'use /api/nhentai?artist= to get artist api',
   });
 });
 
 app.listen(3000, () => {
-  console.log("Server is running on http://localhost:3000/api");
+  console.log('Server is running on http://localhost:3000/api');
 });

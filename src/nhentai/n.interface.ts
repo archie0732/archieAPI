@@ -1,6 +1,6 @@
 export interface Doujin {
   id: number;
-  media_id: number;
+  media_id: string;
   title: {
     english: string;
     japanese: string;
@@ -19,7 +19,7 @@ export interface Doujin {
 }
 
 export interface Page {
-  t: string;
+  t: 'p' | 'j' | 'w' | 'g';
   w: number;
   h: number;
 }
