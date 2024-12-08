@@ -1,9 +1,18 @@
 import { doujinAPI } from './nhentai/album';
 import { artistAPI } from './nhentai/artist';
-import express from 'express';
 import { doiujinSearchAPI } from './nhentai/search';
 
+import express from 'express';
+import cors from 'cors';
+
 const app = express();
+
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  }),
+);
 
 // artist
 app.get('/api/nhentai/artist', async (req, res) => {
@@ -50,6 +59,6 @@ app.get('/api', (_, res) => {
   });
 });
 
-app.listen(3000, () => {
-  console.log('Server is running on http://localhost:3000/api');
+app.listen(3001, () => {
+  console.log('Server is running on http://localhost:3001/api');
 });

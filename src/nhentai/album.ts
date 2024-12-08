@@ -19,13 +19,7 @@ export const doujinAPI = async (id: string): Promise<NAPIError | R7APIDoujinData
   for (let i = 0, n = json.images.pages.length; i < n; i++) {
     const image = json.images.pages[i];
 
-    imgURL.push(
-      toImageUrl(
-        json.media_id,
-        i + 1,
-        ImageExtensions[image.t],
-      ),
-    );
+    imgURL.push(toImageUrl(json.media_id, i + 1, ImageExtensions[image.t]));
   }
 
   const e = ImageExtensions[json.images.thumbnail.t];
