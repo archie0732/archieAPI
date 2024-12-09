@@ -21,3 +21,11 @@ export const findLang = (data_tags: string): 'jp' | 'zh' | 'en' => {
 
   return lang || 'jp';
 };
+
+export const throwErrorAPI = (sourceWeb: string, status: number, message: string) => {
+  return {
+    sourceWeb,
+    status,
+    detail: message,
+  };
+};

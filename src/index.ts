@@ -8,6 +8,7 @@ import cors from 'cors';
 const app = express();
 
 app.use(
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   cors({
     origin: 'http://localhost:3000',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
@@ -15,8 +16,8 @@ app.use(
 );
 
 // artist
-app.get('/api/nhentai/artist', async (req, res) => {
-  const artist = req.query['artist'];
+app.get('/api/nhentai/artist/:artist', async (req, res) => {
+  const artist = req.params['artist'];
 
   if (typeof artist !== 'string') {
     res.status(400);
@@ -40,6 +41,7 @@ app.get('/api/nhentai/doujin/:id', async (req, res) => {
   res.json(doiujin);
 });
 
+// search
 app.get('/api/nhentai/search', async (req, res) => {
   const keyword = req.query['q'];
 

@@ -27,3 +27,14 @@ export interface R7NView {
   cover: string;
   lang: 'jp' | 'zh' | 'en';
 }
+
+export class R7APIError extends Error {
+  status: number;
+  arg: unknown;
+  constructor(message: string, status: number, arg: unknown) {
+    super(message);
+    this.message = message;
+    this.status = status;
+    this.arg = arg;
+  }
+}
